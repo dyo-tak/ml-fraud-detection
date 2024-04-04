@@ -3,20 +3,21 @@ import numpy as np
 import  pandas as pd
 from datetime import datetime as dt
 import category_encoders as ce
+import warnings 
+warnings.filterwarnings('ignore') 
 
 class FraudPrediction:
     def __init__(self):
-        self.model = joblib.load('../models/gboost_ru.pkl')
+        self.model = joblib.load('./models/gboost_ru.pkl')
         
         
     def preprocess(self, data):
         data['age'] = int(data['age'])
-        data['amount'] = int(data['amount'])
+        data['amount'] = float(data['amount'])
         data['hour'] = dt.strptime(data['timeOfTransaction'], '%H:%M').hour
         data['amt_log'] = np.log(data['amount'])
         
         woe = ce.WOEEncoder()
-        print(data['category'])
         data['category_WOE'] = 1
         data['city_WOE'] = 1
         data['job_WOE'] = 1

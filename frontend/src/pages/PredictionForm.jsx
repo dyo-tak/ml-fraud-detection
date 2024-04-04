@@ -35,15 +35,22 @@ function PredictionForm() {
   const toast = useToast();
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [name]: value,
+    });
+  };
+
+  const handleSelectChange = (selectedOption, fieldName) => {
+    setForm({
+      ...form,
+      [fieldName]: selectedOption.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(categories, jobs);
     try {
       const response = await fetch("http://127.0.0.1:5000/predict", {
         method: "POST",
@@ -55,7 +62,7 @@ function PredictionForm() {
       const data = await response.json();
       console.log(data.prediction);
 
-      if (data.prediction && data.prediction === true) {
+      if (data.prediction && data.prediction === '1') {
         toast({
           title: "Fraud",
           description: "This transaction is fraudulent.",
@@ -101,15 +108,16 @@ function PredictionForm() {
           <ReactSelect
             name="job"
             options={jobOptions}
-            onChange={handleChange}
+            onChange = {(selectedOption) => handleSelectChange(selectedOption, "job")}
           />
+
         </FormControl>
         <FormControl id="category" isRequired>
           <FormLabel>Category</FormLabel>
           <ReactSelect
             name="category"
             options={categoryOptions}
-            onChange={handleChange}
+            onChange = {(selectedOption) => handleSelectChange(selectedOption, "category")}
           />
         </FormControl>
         <FormControl id="timeOfTransaction" isRequired>
@@ -122,7 +130,7 @@ function PredictionForm() {
         </FormControl>
         <FormControl id="amount" isRequired>
           <FormLabel>Amount</FormLabel>
-          <Input name="amount" type="number" onChange={handleChange} />
+          <Input name="amount" type="decimal" onChange={handleChange} />
         </FormControl>
         <FormControl id="merchantLocation" isRequired>
           <FormLabel>Merchant Location</FormLabel>

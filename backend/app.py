@@ -14,9 +14,10 @@ def hello_world():
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
+    print(data)
     fp = FraudPrediction()
     prediction = fp.predict(data)
-    return jsonify({"prediction":prediction})
+    return jsonify({"prediction":f"{prediction}"})
 
 if __name__ == '__main__':
     logging.basicConfig(filename='app.log', level=logging.INFO)
