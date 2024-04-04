@@ -23,7 +23,7 @@ def get_woe_value(column_name, value):
 
 class FraudPrediction:
     def __init__(self):
-        self.model = joblib.load('./models/gboost_ru.pkl')
+        self.model = joblib.load('./models/gboost.pkl')
         self.locator = Nominatim(user_agent="Geopy Library")
         
     def preprocess(self, data):
