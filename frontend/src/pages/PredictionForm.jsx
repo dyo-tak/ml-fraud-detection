@@ -13,12 +13,13 @@ import {
 
 import data from "../../public/selection_data";
 
-const { categories, jobs } = data;
+const { categories, jobs, cities } = data;
 const categoryOptions = categories.map((category) => ({
   value: category,
   label: category,
 }));
 const jobOptions = jobs.map((job) => ({ value: job, label: job }));
+const cityOptions = cities.map((city) => ({ value: city, label: city }));
 
 function PredictionForm() {
   const [form, setForm] = useState({
@@ -101,7 +102,11 @@ function PredictionForm() {
         </FormControl>
         <FormControl id="city" isRequired>
           <FormLabel>City</FormLabel>
-          <Input name="city" type="text" onChange={handleChange} />
+          <ReactSelect
+            name="city"
+            options={cityOptions}
+            onChange = {(selectedOption) => handleSelectChange(selectedOption, "city")}
+          />
         </FormControl>
         <FormControl id="job" isRequired>
           <FormLabel>Job</FormLabel>
