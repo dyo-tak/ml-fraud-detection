@@ -36,10 +36,14 @@ python3 -m venv .venv
 Start the virtual environment -
 
 - In Windows run
-  > .venv\Scripts\activate
+  ```bash
+  .venv\Scripts\activate
+  ```
 
 - For MacOS / Linus
-  > source .venv/bin/activate
+  ```bash
+  source .venv/bin/activate
+  ```
 
 
 ```bash
