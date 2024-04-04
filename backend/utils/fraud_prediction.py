@@ -11,8 +11,7 @@ class FraudPrediction:
         
     def preprocess(self, data):
         data['age'] = int(data['age'])
-        # data['amount'] = int(data['amount'])
-        data['amount'] = 1000000000000
+        data['amount'] = int(data['amount'])
         data['hour'] = dt.strptime(data['timeOfTransaction'], '%H:%M').hour
         data['amt_log'] = np.log(data['amount'])
         
