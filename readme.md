@@ -32,6 +32,17 @@ Change directory to ./backend, create python environment and then install depend
 ```bash
 cd ./backend
 python3 -m venv .venv
+```
+Start the virtual environment -
+
+- In Windows run
+  > .venv\Scripts\activate
+
+- For MacOS / Linus
+  > source .venv/bin/activate
+
+
+```bash
 pip3 install -r requirements.txt
 flask run
 ```
