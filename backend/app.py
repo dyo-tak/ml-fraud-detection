@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import logging
+from utils.fraud_prediction import FraudPrediction
 
 app = Flask(__name__)
 CORS(app)
@@ -13,8 +14,8 @@ def hello_world():
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
-    print(data)
-    prediction = True
+    fp = FraudPrediction()
+    prediction = fp.predict(data)
     return jsonify({"prediction":prediction})
 
 if __name__ == '__main__':
