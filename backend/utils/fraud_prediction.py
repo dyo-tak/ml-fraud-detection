@@ -34,7 +34,7 @@ class FraudPrediction:
         data['category_WOE'] = get_woe_value('category', data['category'])
         data['job_WOE'] =  get_woe_value('job', data['job'])
         data['city_WOE'] = get_woe_value('city', data['city'])
-        data['cc_num_frequency'] = random.randint(0,1000)
+        data['cc_num_frequency'] = get_frequency()
         data['merchant_location'] = data['merchantLocation']
         location = self.locator.geocode(data['merchant_location'])
         if location:
@@ -53,10 +53,45 @@ class FraudPrediction:
             data['cc_num_frequency']
         ], dtype=float).reshape(1, -1)
 
+        print(data['cc_num_frequency'])
         return model_data
 
 
     def predict(self, data):
         preproccess_data = self.preprocess(data)
         prediction = self.model.predict(preproccess_data)
+        print(prediction[0])
         return prediction[0]
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+def get_frequency():
+    return random.randint(0,1000)

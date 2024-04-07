@@ -14,7 +14,7 @@ def hello_world():
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
-    print(data)
+    # print(data)
     fp = FraudPrediction()
     prediction = fp.predict(data)
     return jsonify({"prediction":f"{prediction}"})
